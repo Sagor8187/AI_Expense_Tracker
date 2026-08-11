@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+AI Expense Tracker - Project Design & 4-Day Plan
+Tech Stack: Next.js, TypeScript, Redux Toolkit, Express.js, MongoDB
 
-## Getting Started
+1. Project Goal
+Build a production-ready expense tracker where users manage income, expenses, budgets, and analytics.
+2. Core Features
+•	JWT Authentication (Register/Login)
+•	Dashboard with summary cards
+•	Add/Edit/Delete Income
+•	Add/Edit/Delete Expense
+•	Categories
+•	Monthly analytics
+•	Search, filter, pagination
+•	Budget limit and warnings
+•	Profile page
+•	Responsive UI
+3. System Workflow
+1.	User registers or logs in.
+2.	JWT is stored.
+3.	Dashboard requests summary APIs.
+4.	User adds income or expense.
+5.	Backend validates data and saves to MongoDB.
+6.	Dashboard refreshes totals.
+7.	Analytics page aggregates monthly data.
+4. Database Design
+Users
+- _id
+- name
+- email
+- password
+- avatar
+- createdAt
 
-First, run the development server:
+Categories
+- _id
+- userId
+- name
+- type (income/expense)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Transactions
+- _id
+- userId
+- categoryId
+- type
+- amount
+- title
+- note
+- date
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Budgets
+- _id
+- userId
+- month
+- amount
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+5. API Endpoints
+•	POST /auth/register
+•	POST /auth/login
+•	GET /transactions
+•	POST /transactions
+•	PATCH /transactions/:id
+•	DELETE /transactions/:id
+•	GET /dashboard/summary
+•	GET /analytics/monthly
+•	GET /budgets
+•	POST /budgets
+6. Redux Structure
+•	authSlice
+•	transactionSlice
+•	budgetSlice
+•	dashboardSlice
+•	api services
+7. Folder Structure
+client/
+ app/
+ components/
+ redux/
+ services/
+ types/
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+server/
+ controllers/
+ routes/
+ models/
+ middleware/
+ utils/
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+8. Four-Day Development Plan
+•	Day 1: Setup project, authentication, MongoDB models, Redux auth, login/register UI.
+•	Day 2: CRUD for transactions, category management, dashboard summary cards.
+•	Day 3: Budget module, analytics APIs, charts, search/filter/pagination.
+•	Day 4: Responsive polish, validation, testing, bug fixing, README, deployment.
+9. Resume Highlights
+•	Role-based architecture
+•	JWT Authentication
+•	Redux Toolkit state management
+•	REST API
+•	MongoDB Aggregation
+•	Responsive UI
