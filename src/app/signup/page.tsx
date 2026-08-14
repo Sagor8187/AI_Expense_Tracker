@@ -12,6 +12,7 @@ import {
   FiArrowRight 
 } from "react-icons/fi";
 import { HiSparkles } from "react-icons/hi2";
+import { authClient } from "@/lib/auth-client";
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,6 +25,8 @@ export default function RegisterPage() {
     password: "",
   });
 
+
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -31,6 +34,14 @@ export default function RegisterPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
+const { data, error } = await authClient.signUp.email({
+        name: formData.name,        
+        email: formData.email,        
+        password: formData.password,  
+        image: formData.avatar || undefined,
+        callbackURL: "/dashboard",    
+      });
 
     // Payload matches MongoDB User schema (_id, name, email, password, avatar)
     console.log("Register Payload:", formData);

@@ -10,8 +10,11 @@ import {
   FiArrowRight 
 } from "react-icons/fi";
 import { HiSparkles } from "react-icons/hi2";
+import { authClient } from "@/lib/auth-client";
 
 export default function LoginPage() {
+
+
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -27,6 +30,13 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
+    const { data, error } = await authClient.signIn.email({
+    email: formData.email, // required
+    password: formData.password, // required
+    rememberMe: true,
+   callbackURL:"/"
+});
 
     // Payload for POST /auth/login
     console.log("Login Payload:", formData);
