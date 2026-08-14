@@ -14,6 +14,7 @@ import {
   FiX 
 } from "react-icons/fi";
 import { HiSparkles } from "react-icons/hi2";
+import { authClient } from "@/lib/auth-client";
 
 // Types
 interface NavItem {
@@ -32,10 +33,23 @@ const navItems: NavItem[] = [
 export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+ 
 
+const { data: session } = authClient.useSession()
+  const isAuthenticated = !!session;
   // Example Redux state placeholder
-  const isAuthenticated = false;
-  const user = { name: "Sagor", avatar: "" };
+  
+ interface User {
+  name: string;
+  avatar?: string | null; 
+}
+  const user : User = { name: "", avatar: "" };
+
+  if(session){
+   user.name = session.user.name 
+   user.avatar = session.user.image 
+    console.log(session)
+  }
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
 
@@ -84,14 +98,14 @@ export default function Navbar() {
                 className="flex items-center gap-2.5 rounded-full py-1 pl-1 pr-3 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors"
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-200 text-slate-700 font-semibold text-xs dark:bg-slate-800 dark:text-slate-200">
-                  {user.name.charAt(0).toUpperCase()}
+                  {user.name.charAt(0).toUpperCase() || user.avatar}
                 </div>
                 <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
                   {user.name}
                 </span>
               </Link>
               <button
-                onClick={() => console.log("Logout action")}
+                onClick={async() => await authClient.signOut()}
                 className="rounded-lg p-2 text-slate-500 hover:bg-red-50 hover:text-red-600 dark:text-slate-400 dark:hover:bg-red-950/40 dark:hover:text-red-400 transition-colors"
                 title="Logout"
               >
@@ -163,8 +177,8 @@ export default function Navbar() {
                   Profile Settings
                 </Link>
                 <button
-                  onClick={() => {
-                    console.log("Logout action");
+                  onClick={async() => {
+                  await authClient.signOut();
                     setIsOpen(false);
                   }}
                   className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-base font-medium text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/30"
