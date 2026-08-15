@@ -170,7 +170,7 @@ export default function DashboardPage() {
                   <p className="text-xs text-slate-500 dark:text-slate-400">Your latest income and expenses</p>
                 </div>
                 <Link
-                  href="/transactions"
+                  href="/transaction"
                   className="inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 hover:underline dark:text-indigo-400"
                 >
                   View All <FiArrowRight />
@@ -308,7 +308,7 @@ export default function DashboardPage() {
               <h2 className="text-base font-bold text-slate-900 dark:text-white">Quick Actions</h2>
               <div className="mt-4 grid grid-cols-2 gap-3">
                 <Link
-                  href="/transactions"
+                  href="/transaction"
                   className="flex flex-col items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 p-4 text-center text-xs font-semibold text-slate-700 transition-all hover:border-indigo-500 hover:bg-indigo-50/50 hover:text-indigo-600 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300 dark:hover:border-indigo-500/50 dark:hover:bg-indigo-950/20 dark:hover:text-indigo-400"
                 >
                   <FiCreditCard className="h-5 w-5 text-indigo-500" />
